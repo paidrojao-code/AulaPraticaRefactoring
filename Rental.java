@@ -1,4 +1,3 @@
-
 public class Rental {
 
    private Movie _movie;
@@ -17,7 +16,6 @@ public class Rental {
       return _movie;
    }
    
-   // <--- NOVO MÉTODO ADICIONADO AQUI
    public double getCharge() {
       double result = 0;
       
@@ -38,5 +36,15 @@ public class Rental {
              break;
       }
       return result;
+   }
+   
+   // <--- NOVO MÉTODO ADICIONADO AQUI
+   public int getFrequentRenterPoints() {
+       // add frequent renter points
+       int result = 1;
+       // add bonus for a two day new release rental
+       if ((_movie.getPriceCode() == Movie.NEW_RELEASE) &&
+           _daysRented > 1) result++;
+       return result;
    }
 }
