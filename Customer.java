@@ -23,9 +23,11 @@ public class Customer {
      Enumeration rentals = _rentals.elements();
      String result = "Rental Record for " + getName() + "\n";
      while (rentals.hasMoreElements()) {
-        // A chamada aqui permanece 'each', pois é a variável local do loop
         Rental each = (Rental) rentals.nextElement();
-        double thisAmount = amountFor(each); 
+        
+        // determine amounts for each line
+        // Chamada atualizada para o novo método getCharge() na classe Rental
+        double thisAmount = each.getCharge(); 
 
         // add frequent renter points
         frequentRenterPoints ++;
@@ -45,27 +47,6 @@ public class Customer {
              " frequent renter points";
      return result;
    }
-
-   // <--- MUDANÇA AQUI: Parâmetro renomeado para aRental
-   private double amountFor(Rental aRental) {
-      double thisAmount = 0;
-      
-      // determine amounts for each line (O switch-case original)
-      switch (aRental.getMovie().getPriceCode()) { // <--- USO DE aRental
-         case Movie.REGULAR:
-            thisAmount += 2;
-            if (aRental.getDaysRented() > 2) // <--- USO DE aRental
-               thisAmount += (aRental.getDaysRented() - 2) * 1.5; // <--- USO DE aRental
-            break;
-         case Movie.NEW_RELEASE:
-            thisAmount += aRental.getDaysRented() * 3; // <--- USO DE aRental
-            break;
-         case Movie.CHILDRENS:
-            thisAmount += 1.5;
-            if (aRental.getDaysRented() > 3) // <--- USO DE aRental
-               thisAmount += (aRental.getDaysRented() - 3) * 1.5; // <--- USO DE aRental
-             break;
-      }
-      return thisAmount;
-   }
+   
+   // O método amountFor FOI REMOVIDO DESTA CLASSE
 }
