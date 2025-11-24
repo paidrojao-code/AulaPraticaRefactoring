@@ -24,10 +24,7 @@ public class Customer {
      String result = "Rental Record for " + getName() + "\n";
      while (rentals.hasMoreElements()) {
         Rental each = (Rental) rentals.nextElement();
-        
-        // determine amounts for each line
-        // Chamada atualizada para o novo método getCharge() na classe Rental
-        double thisAmount = each.getCharge(); 
+        // A variável thisAmount foi removida (Refactoring 4)
 
         // add frequent renter points
         frequentRenterPoints ++;
@@ -36,9 +33,11 @@ public class Customer {
             each.getDaysRented() > 1) frequentRenterPoints ++;
 
         //show figures for this rental
+        // thisAmount substituído por each.getCharge()
         result += "\t" + each.getMovie().getTitle()+ "\t" +
-            String.valueOf(thisAmount) + "\n";
-        totalAmount += thisAmount;
+            String.valueOf(each.getCharge()) + "\n"; 
+        // thisAmount substituído por each.getCharge()
+        totalAmount += each.getCharge(); 
 
      }
      //add footer lines
@@ -47,6 +46,4 @@ public class Customer {
              " frequent renter points";
      return result;
    }
-   
-   // O método amountFor FOI REMOVIDO DESTA CLASSE
 }
